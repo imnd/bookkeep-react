@@ -2,7 +2,7 @@ import React from "react";
 import { IModel } from "../../types/types";
 
 export default function FormBody(props: {
-  saveModel: (e: any) => void;
+  saveModel: (e: React.ChangeEvent<HTMLFormElement>) => void;
   hideItemForm: () => void;
   showDeleteForm: (item: IModel | null) => void;
   renderForm: (model: IModel | null) => React.ReactNode;

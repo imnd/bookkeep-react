@@ -75,14 +75,13 @@ export default function List(props: ListProps) {
     }
   }
 
-  const saveModel = async (e: any) => {
+  const saveModel = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
 
     const requestData = {
-      rows: [{}],
-      // } as IKeyVal<string | string[] | {}[]>;
+      rows: [] as IKeyVal<string>[],
     } as any;
 
     const keys: string[] = [];
@@ -111,9 +110,9 @@ export default function List(props: ListProps) {
         data.forEach((val, rowKey) => {
           if (val) {
             if (!requestData.rows[rowKey]) {
-              requestData.rows[rowKey] = {};
+              requestData.rows[rowKey] = {} as IKeyVal<string>;
             }
-            requestData.rows[rowKey][key] = val;
+            requestData.rows[rowKey][key as string] = val;
           }
         });
         delete requestData[dataKey];
@@ -127,7 +126,9 @@ export default function List(props: ListProps) {
     });
   };
 
-  const deleteModel = async (e: any) => {
+  const deleteModel = async (
+    e: React.MouseEvent<HTMLAnchorElement | MouseEvent>,
+  ) => {
     e.preventDefault();
     await axios.delete(`${apiPath}/${model?.id}`).then(() => {
       fetchItems();

@@ -1,4 +1,5 @@
 import { IModel } from "../../types/types";
+import React from "react";
 
 export default function DeleteButton(props: {
   handler: (item: IModel) => void;
@@ -7,7 +8,9 @@ export default function DeleteButton(props: {
   return (
     <button
       type="button"
-      onClick={(e) => props.handler(props.item)}
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+        props.handler(props.item)
+      }
       className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300"
     >
       <svg

@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function UpdateButton<T>(props: {
   handler: (item: T) => void;
   item: any;
@@ -5,7 +7,9 @@ export default function UpdateButton<T>(props: {
   return (
     <button
       type="button"
-      onClick={(e) => props.handler(props.item)}
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+        props.handler(props.item)
+      }
       id="updateButton"
       className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300"
     >

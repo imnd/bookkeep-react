@@ -1,8 +1,8 @@
 import React from "react";
 
 export default function DeleteForm(props: {
-  onClose: () => void;
-  onDelete: (e: any) => Promise<void>;
+  onClose: React.MouseEventHandler<SVGSVGElement | HTMLAnchorElement>;
+  onDelete: React.MouseEventHandler<HTMLAnchorElement | MouseEvent>;
 }) {
   return (
     <div
@@ -26,7 +26,7 @@ export default function DeleteForm(props: {
         className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
       >
         <svg
-          onClick={() => props.onClose()}
+          onClick={props.onClose}
           aria-hidden="true"
           className="w-5 h-5"
           fill="currentColor"
@@ -66,7 +66,7 @@ export default function DeleteForm(props: {
         Yes, I'm sure
       </a>
       <a
-        onClick={() => props.onClose()}
+        onClick={props.onClose}
         href="#"
         className="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-sm px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
         data-modal-toggle="delete-item-modal"
