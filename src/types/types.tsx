@@ -9,6 +9,10 @@ export interface IKeyVal<T> {
   [key: string]: T;
 }
 
+export interface IArrayKeyVal<T> {
+  [key: number]: IKeyVal<T>;
+}
+
 // Models
 
 export interface IModel {

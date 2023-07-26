@@ -3,7 +3,7 @@ import DeleteButton from "./DeleteButton";
 import UpdateButton from "./UpdateButton";
 import DeleteForm from "./DeleteForm";
 import axios from "axios";
-import { IKeyVal, IModel } from "../../types/types";
+import { IArrayKeyVal, IKeyVal, IModel } from "../../types/types";
 import CreateButton from "./CreateButton";
 import Hat from "./Hat";
 import FormDocker from "./FormDocker";
@@ -80,8 +80,9 @@ export default function List(props: ListProps) {
 
     const formData = new FormData(e.target);
 
-    const requestData = {
-      rows: [] as IKeyVal<string>[],
+    let requestData = {
+      rows: [] as IArrayKeyVal<string>,
+      // } as IKeyVal<string | string[] | IArrayKeyVal<string>>;
     } as any;
 
     const keys: string[] = [];
@@ -109,10 +110,10 @@ export default function List(props: ListProps) {
 
         data.forEach((val, rowKey) => {
           if (val) {
-            if (!requestData.rows[rowKey]) {
+            if (requestData.rows[rowKey] === undefined) {
               requestData.rows[rowKey] = {} as IKeyVal<string>;
             }
-            requestData.rows[rowKey][key as string] = val;
+            requestData.rows[rowKey][key] = val;
           }
         });
         delete requestData[dataKey];
