@@ -17,6 +17,7 @@ const BanksList: FC = () => {
   return (
     <List
       entityName="bank"
+      apiPath="banks"
       hatItems={["ID", "Name", "BIC", "Status"]}
       renderItem={(bank: IBank) => (
         <BankItem
@@ -26,7 +27,6 @@ const BanksList: FC = () => {
         />
       )}
       renderForm={(bank: IBank) => <BankForm model={bank} />}
-      apiPath="banks"
     />
   );
 };

@@ -4,7 +4,7 @@ import BaseLabel from "./BaseLabel";
 
 export default function BaseTextarea(props: {
   name: string;
-  model: IModel | null;
+  model: IModel | undefined;
   value?: string | number;
   multiple?: boolean;
   label?: string;

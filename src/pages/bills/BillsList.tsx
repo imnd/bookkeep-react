@@ -22,6 +22,7 @@ const BillsList: FC = () => {
   return (
     <List
       entityName="bill"
+      apiPath="bills"
       hatItems={["ID", "Contract number", "Sum", "Remainder"]}
       renderItem={(bill: IBill) => (
         <BillItem
@@ -31,7 +32,6 @@ const BillsList: FC = () => {
         />
       )}
       renderForm={(bill: IBill) => <BillForm model={bill} clients={clients} />}
-      apiPath="bills"
     />
   );
 };

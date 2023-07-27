@@ -40,6 +40,7 @@ const PurchasesList: FC = () => {
         />
       )}
       formMode="modal"
+      withRows={true}
     />
   );
 };

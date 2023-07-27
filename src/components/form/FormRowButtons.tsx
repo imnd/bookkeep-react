@@ -1,8 +1,8 @@
 import { IModel } from "../../types/types";
-import { FormRowHelpers } from "./helpers";
+import { FormHelpers } from "./helpers";
 
-export default function FormRowButtons(props: { model?: IModel }) {
-  const formRowHelpers = new FormRowHelpers(props.model);
+export default function FormRowButtons(props: { model: IModel | undefined }) {
+  const formRowHelpers = new FormHelpers(props.model);
 
   return (
     <td>

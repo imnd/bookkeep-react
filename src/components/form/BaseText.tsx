@@ -3,7 +3,7 @@ import BaseLabel from "./BaseLabel";
 
 export default function BaseText(props: {
   name: string;
-  model: IModel | null;
+  model: IModel | undefined;
   value?: string | number;
   type?: string;
   multiple?: boolean;

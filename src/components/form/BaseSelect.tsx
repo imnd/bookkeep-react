@@ -4,7 +4,7 @@ import BaseLabel from "./BaseLabel";
 export default function BaseSelect(props: {
   name: string;
   options: IKeyVal<string>;
-  model: IModel | null;
+  model?: IModel | undefined;
   multiple?: boolean;
   value?: string | number;
   type?: string;

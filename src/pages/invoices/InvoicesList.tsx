@@ -46,6 +46,7 @@ const InvoicesList: FC = () => {
         <InvoiceForm model={item} clients={clients} articles={articles} />
       )}
       formMode="modal"
+      withRows={true}
     />
   );
 };

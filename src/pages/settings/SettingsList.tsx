@@ -21,7 +21,9 @@ const SettingsList: FC = () => {
       hatItems={["ID", "Name", "Key", "Value"]}
       renderItem={(setting: ISetting) => (
         <SettingItem
-          onClick={(setting: ISetting) => history.push("/settings/" + setting.id)}
+          onClick={(setting: ISetting) =>
+            history.push("/settings/" + setting.id)
+          }
           setting={setting}
           key={setting.id}
         />

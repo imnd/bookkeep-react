@@ -24,6 +24,7 @@ const ArticleSubcategoriesList: FC = () => {
   return (
     <List
       entityName="article subcategory"
+      apiPath="article-subcategories"
       hatItems={["ID", "Category", "Name"]}
       renderItem={(item: IArticleSubcategory) => (
         <ArticleSubcategoryItem
@@ -35,7 +36,6 @@ const ArticleSubcategoriesList: FC = () => {
       renderForm={(item: IArticleSubcategory) => (
         <ArticleSubcategoryForm model={item} categories={categories} />
       )}
-      apiPath="article-subcategories"
     />
   );
 };

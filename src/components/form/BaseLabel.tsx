@@ -1,8 +1,8 @@
 export default function BaseLabel(props: {
   name: string;
-  label?: string;
-  id?: string;
-  required?: boolean;
+  label?: string | undefined;
+  id?: string | undefined;
+  required?: boolean | undefined;
 }) {
   return (
     <label

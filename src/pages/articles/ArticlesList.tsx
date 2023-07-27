@@ -21,8 +21,11 @@ const ArticlesList: FC = () => {
   }, []);
 
   const history = useHistory();
+
   return (
     <List
+      entityName="article"
+      apiPath="articles"
       hatItems={["ID", "Name", "Price", "Unit", "Status"]}
       renderItem={(item: IArticle) => (
         <ArticleItem
@@ -33,8 +36,6 @@ const ArticlesList: FC = () => {
       renderForm={(item: IArticle) => (
         <ArticleForm model={item} subcategories={subcategories} />
       )}
-      entityName="article"
-      apiPath="articles"
     />
   );
 };

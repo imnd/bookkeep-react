@@ -2,15 +2,15 @@ import React from "react";
 import { IModel } from "../../types/types";
 
 export default function FormBody(props: {
-  saveModel: (e: React.ChangeEvent<HTMLFormElement>) => void;
+  submitForm: (e: React.ChangeEvent<HTMLFormElement>) => void;
   hideItemForm: () => void;
-  showDeleteForm: (item: IModel | null) => void;
-  renderForm: (model: IModel | null) => React.ReactNode;
+  showDeleteForm: (item: IModel | undefined) => void;
+  renderForm: (model: IModel | undefined) => React.ReactNode;
   action: string;
-  model: IModel | null;
+  model: IModel | undefined;
 }) {
   return (
-    <form className="space-y-4" action="#" onSubmit={props.saveModel}>
+    <form className="space-y-4" action="#" onSubmit={props.submitForm}>
       {props.renderForm(props.model)}
       <div className="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 sm:absolute sm:px-4 sm:mt-0">
         <button

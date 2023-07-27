@@ -1,14 +1,14 @@
 import BaseSelect from "../../components/form/BaseSelect";
 import BaseText from "../../components/form/BaseText";
 import FormRowButtons from "../../components/form/FormRowButtons";
-import { FormRowHelpers } from "../../components/form/helpers";
+import { FormHelpers } from "../../components/form/helpers";
 import { IKeyVal, IRow } from "../../types/types";
 
 export default function ContractRow(props: {
   model?: IRow;
   articles: IKeyVal<string>;
 }) {
-  const formRowHelpers = new FormRowHelpers(props.model);
+  const formRowHelpers = new FormHelpers(props.model);
 
   return (
     <tr id={formRowHelpers.getRowId()}>
@@ -17,7 +17,7 @@ export default function ContractRow(props: {
           name="articleId"
           options={props.articles}
           multiple={true}
-          model={props.model ?? null}
+          model={props.model}
           showLabel={false}
           voidText="Select article"
         />
@@ -27,7 +27,7 @@ export default function ContractRow(props: {
           name="quantity"
           type="number"
           multiple={true}
-          model={props.model ?? null}
+          model={props.model}
           showLabel={false}
         />
       </td>
@@ -36,7 +36,7 @@ export default function ContractRow(props: {
           name="price"
           type="number"
           multiple={true}
-          model={props.model ?? null}
+          model={props.model}
           showLabel={false}
         />
       </td>

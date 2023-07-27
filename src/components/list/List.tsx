@@ -3,12 +3,13 @@ import DeleteButton from "./DeleteButton";
 import UpdateButton from "./UpdateButton";
 import DeleteForm from "./DeleteForm";
 import axios from "axios";
-import { IArrayKeyVal, IKeyVal, IModel } from "../../types/types";
+import { IModel } from "../../types/types";
 import CreateButton from "./CreateButton";
 import Hat from "./Hat";
 import FormDocker from "./FormDocker";
 import FormBody from "./FormBody";
 import FormModal from "./FormModal";
+import { getRequestData, getRequestDataWithRows } from "../form/helpers";
 
 interface ModelContextProps<T> {
   model: T | null;
@@ -26,19 +27,20 @@ interface ListProps {
   apiPath: string;
   formMode?: string;
   hatItems: string[];
+  withRows?: boolean;
 }
 
 export default function List(props: ListProps) {
-  const [model, setModel] = useState<IModel | null>({
+  const [model, setModel] = useState<IModel | undefined>({
     id: -1,
-  } as IModel | null);
+  } as IModel | undefined);
   const [action, setAction] = useState<string>("");
   const [items, setItems] = useState<IModel[]>([]);
 
   // Item form show / hide
   const [itemFormVisible, setItemFormVisible] = useState(false);
   const showCreateForm = () => {
-    setModel(null);
+    setModel(undefined);
     setAction("Create");
     setItemFormVisible(true);
   };
@@ -52,7 +54,7 @@ export default function List(props: ListProps) {
   };
   // Delete form show / hide
   const [deleteFormVisible, setDeleteFormVisible] = useState(false);
-  const showDeleteForm = (item: IModel | null) => {
+  const showDeleteForm = (item: IModel | undefined) => {
     setModel(item);
     setDeleteFormVisible(true);
   };
@@ -75,56 +77,17 @@ export default function List(props: ListProps) {
     }
   }
 
-  const saveModel = async (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const submitForm = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    const requestData = props?.withRows
+      ? getRequestDataWithRows(e)
+      : getRequestData(e);
 
-    const formData = new FormData(e.target);
-
-    let requestData = {
-      rows: [] as IArrayKeyVal<string>,
-      // } as IKeyVal<string | string[] | IArrayKeyVal<string>>;
-    } as any;
-
-    const keys: string[] = [];
-    formData.forEach((val, key) => {
-      const value = val as string;
-
-      if (key.indexOf("[]") !== -1) {
-        if (keys.includes(key)) {
-          const values = requestData[key] as string[];
-          values.push(value);
-          requestData[key] = values;
-        } else {
-          keys.push(key);
-          requestData[key] = [value];
-        }
-      } else {
-        requestData[key] = value;
-      }
-    });
-
-    for (const dataKey in requestData) {
-      if (dataKey.indexOf("[]") !== -1) {
-        const key = dataKey.replace("[]", "");
-        const data = requestData[dataKey] as string[];
-
-        data.forEach((val, rowKey) => {
-          if (val) {
-            if (requestData.rows[rowKey] === undefined) {
-              requestData.rows[rowKey] = {} as IKeyVal<string>;
-            }
-            requestData.rows[rowKey][key] = val;
-          }
-        });
-        delete requestData[dataKey];
-      }
-    }
-
-    let url = apiPath + (model ? `/${model?.id}` : "");
-    await axios.post(url, requestData).then(() => {
-      fetchItems();
-      hideItemForm();
-    });
+    await axios
+      .post(apiPath + (model ? `/${model?.id}` : ""), requestData)
+      .then(() => {
+        fetchItems();
+        hideItemForm();
+      });
   };
 
   const deleteModel = async (
@@ -193,7 +156,7 @@ export default function List(props: ListProps) {
                 <FormBody
                   action={action}
                   model={model}
-                  saveModel={saveModel}
+                  submitForm={submitForm}
                   hideItemForm={hideItemForm}
                   showDeleteForm={showDeleteForm}
                   renderForm={props.renderForm}
@@ -210,7 +173,7 @@ export default function List(props: ListProps) {
                 <FormBody
                   action={action}
                   model={model}
-                  saveModel={saveModel}
+                  submitForm={submitForm}
                   hideItemForm={hideItemForm}
                   showDeleteForm={showDeleteForm}
                   renderForm={props.renderForm}

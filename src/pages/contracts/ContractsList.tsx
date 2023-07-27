@@ -46,6 +46,7 @@ const ContractsList: FC = () => {
         <ContractForm model={item} clients={clients} articles={articles} />
       )}
       formMode="modal"
+      withRows={true}
     />
   );
 };
