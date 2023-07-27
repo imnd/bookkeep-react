@@ -1,4 +1,4 @@
-import {IModel} from "../../types/types";
+import { IModel } from "../../types/types";
 
 export default function BaseCheckbox(props: {
   name: string;
@@ -12,7 +12,9 @@ export default function BaseCheckbox(props: {
     <div className="flex flex-row">
       <input
         type="checkbox"
-        defaultValue={props.model[props.name as keyof IModel] ?? props.default ?? false}
+        defaultChecked={
+          !!props.model[props.name as keyof IModel] ?? props.default ?? false
+        }
         name={props.name}
         id={props?.id ?? props.name}
         required={props?.required ?? false}
